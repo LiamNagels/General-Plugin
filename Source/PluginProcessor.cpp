@@ -187,7 +187,11 @@ void GeneralPluginAudioProcessor::setStateInformation (const void* data, int siz
 juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift", "Pitch shift",-100.f, 100.f, 0.f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift Ce", "Pitch shift Ce", juce::NormalisableRange<float>(-200.f, 200.f, 1.f, 1.f), 0.f));
+
+    layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift ST", "Pitch shift ST", juce::NormalisableRange<float>(-24.f, 24.f, 1.f, 1.f),0.f));
+
+    layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift Oc", "Pitch shift Oc", juce::NormalisableRange<float>(-2.f, 2.f, 1.f, 1.f),0.f));
 
     return layout;
 }
