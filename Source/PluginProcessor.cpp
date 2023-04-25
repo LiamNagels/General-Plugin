@@ -166,7 +166,8 @@ bool GeneralPluginAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* GeneralPluginAudioProcessor::createEditor()
 {
-    return new GeneralPluginAudioProcessorEditor (*this);
+    //return new GeneralPluginAudioProcessorEditor (*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -181,6 +182,14 @@ void GeneralPluginAudioProcessor::setStateInformation (const void* data, int siz
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::createParameterLayout()
+{
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
+    layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift", "Pitch shift",-100.f, 100.f, 0.f));
+
+    return layout;
 }
 
 //==============================================================================

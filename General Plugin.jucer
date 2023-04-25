@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="ACKz86" name="General Plugin" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              cppLanguageStandard="17">
   <MAINGROUP id="xKTpdD" name="General Plugin">
     <GROUP id="{6472A5EC-31C4-D8D2-1380-81C28A0BEFF1}" name="Source">
       <FILE id="rkyKkj" name="PluginProcessor.cpp" compile="1" resource="0"
