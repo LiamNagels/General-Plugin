@@ -14,14 +14,14 @@
 //==============================================================================
 /**
 */
-class GeneralPluginAudioProcessorEditor  : public juce::AudioProcessorEditor
+class GeneralPluginAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
-    GeneralPluginAudioProcessorEditor (GeneralPluginAudioProcessor&);
+    GeneralPluginAudioProcessorEditor(GeneralPluginAudioProcessor&);
     ~GeneralPluginAudioProcessorEditor() override;
 
     //==============================================================================
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
@@ -29,5 +29,5 @@ private:
     // access the processor object that created it.
     GeneralPluginAudioProcessor& audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GeneralPluginAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessorEditor)
 };
