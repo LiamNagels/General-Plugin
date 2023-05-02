@@ -184,13 +184,13 @@ void GeneralPluginAudioProcessor::setStateInformation(const void* data, int size
     // whose contents will have been created by the getStateInformation() call.
 }
 
-juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::createParameterLayout()
-{
-    juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift", "Pitch shift", -100.f, 100.f, 0.f));
+//juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::createParameterLayout()
+//{
+    //juce::AudioProcessorValueTreeState::ParameterLayout layout;
+    //layout.add(std::make_unique<juce::AudioParameterFloat>("Pitch shift", "Pitch shift", -100.f, 100.f, 0.f));
 
-    return layout;
-}
+    //return layout;
+//}
 
 //==============================================================================
 // This creates new instances of the plugin..
