@@ -13,7 +13,7 @@
 //==============================================================================
 /**
 */
-class GeneralPluginAudioProcessor : public juce::AudioProcessor
+class GeneralPluginAudioProcessor : public juce::AudioProcessor, public juce::AudioProcessorValueTreeState::Listener
 #if JucePlugin_Enable_ARA
     , public juce::AudioProcessorARAExtension
 #endif
@@ -55,10 +55,18 @@ public:
     //==============================================================================
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
-    //static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    //juce::AudioProcessorValueTreeState apvts{ *this, nullptr, "parameters", createParameterLayout() };
+    
+    juce::AudioProcessorValueTreeState treestate;
 
-//private:
+private:
+    juce::dsp::Gain<float> inputModule;
+    juce::dsp::WaveShaper<float> distortionModule{juce::dsp::FastMathApproximations::tanh};
+    juce::dsp::Gain<float> outputModule;
+    juce::dsp::Limiter<float> limiterModule;
+    void UpdateParameters();
+    
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    void parameterChanged(const juce::String& parameterID, float newValue)override;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessor)
 };
