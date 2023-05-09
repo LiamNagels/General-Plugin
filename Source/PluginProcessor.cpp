@@ -21,10 +21,13 @@ GeneralPluginAudioProcessor::GeneralPluginAudioProcessor()
 #endif
     )
     , treestate(*this, nullptr, "PARAMETER", createParameterLayout())
+    , waveViewer(1)
 #endif
 {
-    treestate.addParameterListener("input", this);// i am at 56:07
+    treestate.addParameterListener("input", this);
     treestate.addParameterListener("output", this);
+    waveViewer.setRepaintRate(30);
+    waveViewer.setBufferSize(256);
 }
 
 GeneralPluginAudioProcessor::~GeneralPluginAudioProcessor()
@@ -186,6 +189,9 @@ void GeneralPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     distortionModule.process(juce::dsp::ProcessContextReplacing<float>(block));
     limiterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
     outputModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+
+    waveViewer.pushBuffer(buffer);
+
 }
 
 //==============================================================================

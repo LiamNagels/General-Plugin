@@ -57,6 +57,7 @@ public:
     void setStateInformation(const void* data, int sizeInBytes) override;
     
     juce::AudioProcessorValueTreeState treestate;
+    juce::AudioVisualiserComponent waveViewer;
 
 private:
     juce::dsp::Gain<float> inputModule;

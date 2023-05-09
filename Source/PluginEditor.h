@@ -19,7 +19,7 @@ class GeneralPluginAudioProcessorEditor : public juce::AudioProcessorEditor
 public:
     GeneralPluginAudioProcessorEditor(GeneralPluginAudioProcessor&);
     ~GeneralPluginAudioProcessorEditor() override;
-
+    
     //==============================================================================
     void paint(juce::Graphics&) override;
     void resized() override;
