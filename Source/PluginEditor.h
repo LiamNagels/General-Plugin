@@ -11,6 +11,15 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+struct CustomSlider : juce::Slider
+{
+    CustomSlider() : juce::Slider(juce::Slider::SliderStyle::LinearHorizontal, 
+                                  juce::Slider::TextEntryBoxPosition::TextBoxAbove)
+    {
+       
+    }
+};
+
 //==============================================================================
 /**
 */
@@ -28,6 +37,11 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     GeneralPluginAudioProcessor& audioProcessor;
+
+    CustomSlider InputSlider, OutputSlider;
+
+    std::vector<juce::Component*> getComps();
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessorEditor)
 };

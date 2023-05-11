@@ -27,7 +27,8 @@ GeneralPluginAudioProcessor::GeneralPluginAudioProcessor()
     treestate.addParameterListener("input", this);
     treestate.addParameterListener("output", this);
     waveViewer.setRepaintRate(30);
-    waveViewer.setBufferSize(256);
+    //waveViewer.setBufferSize(256);
+    waveViewer.setBufferSize(256*2);
 }
 
 GeneralPluginAudioProcessor::~GeneralPluginAudioProcessor()
@@ -142,6 +143,7 @@ void GeneralPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
     limiterModule.setThreshold(0.99);
     limiterModule.setThreshold(1.f);
     UpdateParameters();
+    
 
 }
 
@@ -191,6 +193,7 @@ void GeneralPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     outputModule.process(juce::dsp::ProcessContextReplacing<float>(block));
 
     waveViewer.pushBuffer(buffer);
+    
 
 }
 
@@ -202,8 +205,8 @@ bool GeneralPluginAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* GeneralPluginAudioProcessor::createEditor()
 {
-    //return new GeneralPluginAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new GeneralPluginAudioProcessorEditor (*this);
+    //return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================

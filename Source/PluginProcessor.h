@@ -65,6 +65,8 @@ private:
     juce::dsp::Gain<float> outputModule;
     juce::dsp::Limiter<float> limiterModule;
     void UpdateParameters();
+
+   
     
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void parameterChanged(const juce::String& parameterID, float newValue)override;
