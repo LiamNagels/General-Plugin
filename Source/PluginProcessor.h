@@ -72,7 +72,7 @@ private:
    
     
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    juce::AudioProcessorValueTreeState apvts{ this, nullptr, "Parameters", createParameterLayout() };
+    juce::AudioProcessorValueTreeState apvts{ this, nullptr, "Parameters", createParameterLayout() }; 
     void parameterChanged(const juce::String& parameterID, float newValue)override;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessor)
