@@ -55,6 +55,8 @@ public:
     //==============================================================================
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
+
+
     
     juce::AudioProcessorValueTreeState treestate;
     juce::AudioVisualiserComponent waveViewer;
@@ -66,9 +68,11 @@ private:
     juce::dsp::Limiter<float> limiterModule;
     void UpdateParameters();
 
+    
    
     
-    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    juce::AudioProcessorValueTreeState apvts{ this, nullptr, "Parameters", createParameterLayout() };
     void parameterChanged(const juce::String& parameterID, float newValue)override;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessor)

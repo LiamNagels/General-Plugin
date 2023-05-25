@@ -26,8 +26,8 @@ GeneralPluginAudioProcessor::GeneralPluginAudioProcessor()
 {
     treestate.addParameterListener("input", this);
     treestate.addParameterListener("output", this);
+    //treestate.addParameterListener("waveZoomer", this);
     waveViewer.setRepaintRate(30);
-    //waveViewer.setBufferSize(256);
     waveViewer.setBufferSize(256*2);
 }
 
@@ -35,17 +35,27 @@ GeneralPluginAudioProcessor::~GeneralPluginAudioProcessor()
 {
     treestate.removeParameterListener("input", this);
     treestate.removeParameterListener("output", this);
+    //treestate.removeParameterListener("waveZoomer", this);
 }
+
 
 juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::createParameterLayout()
 {
     std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
     auto pInput = std::make_unique<juce::AudioParameterFloat>("input", "Input", -24.f, 24.f, 0.f);
     auto pOutput = std::make_unique<juce::AudioParameterFloat>("output", "Output", -24.f, 24.f, 0.f);
+    auto pWaveZoomer = std::make_unique<juce::AudioParameterFloat>("waveZoomer", "WaveZoomer", 32.f, 1024.f, 32.f);
+
+     
+    //layout.add(std::make_unique<juce::AudioParameterFloat>("input", "Input", -24.f, 24.f, 0.f));
+    //layout.add(std::make_unique<juce::AudioParameterFloat>("output", "Output", -24.f, 24.f, 0.f));
+    //layout.add(std::make_unique<juce::AudioParameterFloat>("waveZoomer", "WaveZoomer", 32.f, 1024.f, 32.f));
 
     params.push_back(std::move(pInput));
     params.push_back(std::move(pOutput));
+    params.push_back(std::move(pWaveZoomer));
 
     return{ params.begin(), params.end() };
 }
