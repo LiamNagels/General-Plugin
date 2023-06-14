@@ -24,9 +24,8 @@ GeneralPluginAudioProcessor::GeneralPluginAudioProcessor()
 {
     treestate.addParameterListener("input", this);
     treestate.addParameterListener("output", this);
-    waveViewer.setRepaintRate(30);
-    //waveViewer.setBufferSize(256);
-    waveViewer.setBufferSize(256 * 2);
+    waveViewer.setRepaintRate(60);
+    waveViewer.setBufferSize(256);
 }
 
 GeneralPluginAudioProcessor::~GeneralPluginAudioProcessor()

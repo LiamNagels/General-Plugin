@@ -9,14 +9,26 @@
 
 //==============================================================================
 GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPluginAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p)
+    : AudioProcessorEditor(&p), audioProcessor(p), DistortionSlider()
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    for (auto* comps : getComps())
+    //for (auto* comps : getComps())
+    //{
+    //    addAndMakeVisible(comps);
+    //}
+    
+
+    addAndMakeVisible(DistortionSlider);
+    addAndMakeVisible(OutputSlider);
+
+    WaveZoom.BecomeWaveZoomSlider();
+    addAndMakeVisible(WaveZoom);
+    WaveZoom.onValueChange = [this]()
     {
-        addAndMakeVisible(comps);
-    }
+        audioProcessor.waveViewer.setBufferSize(WaveZoom.getValue());
+    };
+
     addAndMakeVisible(audioProcessor.waveViewer);
     setSize(600, 400);
 }
@@ -44,20 +56,25 @@ void GeneralPluginAudioProcessorEditor::resized()
     //audioProcessor.waveViewer.setBounds(getLocalBounds().withSizeKeepingCentre(getWidth() * 0.5, getHeight() * 0.5));
     auto bounds = getLocalBounds();
     auto responseArea = bounds.removeFromTop(bounds.getHeight() / 2);
+    auto waveZoomArea = responseArea.removeFromBottom(getHeight() * 0.1);
     auto OutputSliderArea = bounds.removeFromBottom(bounds.getHeight() / 2);
-    auto InputSliderArea = OutputSliderArea.removeFromLeft(OutputSliderArea.getWidth() / 2);
+    auto distortionSliderArea = OutputSliderArea.removeFromLeft(OutputSliderArea.getWidth() / 2);
 
     audioProcessor.waveViewer.setBounds(responseArea);
 
-    InputSlider.setBounds(InputSliderArea);
+    DistortionSlider.setBounds(distortionSliderArea);
     OutputSlider.setBounds(OutputSliderArea);
+    WaveZoom.setBounds(waveZoomArea);
+
+    //InputSlider.setBounds(InputSliderArea);
+    //OutputSlider.setBounds(OutputSliderArea);
 }
 
-std::vector<juce::Component*> GeneralPluginAudioProcessorEditor::getComps()
-{
-    return
-    {
-        &InputSlider,
-        &OutputSlider
-    };
-}
+//std::vector<juce::Component*> GeneralPluginAudioProcessorEditor::getComps()
+//{
+//    return
+//    {
+//        &InputSlider,
+//        &OutputSlider
+//    };
+//}
