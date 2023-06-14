@@ -1,8 +1,6 @@
 /*
   ==============================================================================
-
     This file contains the basic framework code for a JUCE plugin editor.
-
   ==============================================================================
 */
 
@@ -11,8 +9,7 @@
 
 //==============================================================================
 GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPluginAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p), 
-    //WaveZoom("samples",32,1024, 1.0, 256)
+    : AudioProcessorEditor(&p), audioProcessor(p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -21,7 +18,6 @@ GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPlug
         addAndMakeVisible(comps);
     }
     addAndMakeVisible(audioProcessor.waveViewer);
-    
     setSize(600, 400);
 }
 
@@ -47,17 +43,14 @@ void GeneralPluginAudioProcessorEditor::resized()
     // subcomponents in your editor..
     //audioProcessor.waveViewer.setBounds(getLocalBounds().withSizeKeepingCentre(getWidth() * 0.5, getHeight() * 0.5));
     auto bounds = getLocalBounds();
-    auto responseSlider = bounds.removeFromTop(bounds.getHeight() / 4);
     auto responseArea = bounds.removeFromTop(bounds.getHeight() / 2);
     auto OutputSliderArea = bounds.removeFromBottom(bounds.getHeight() / 2);
-    auto InputSliderArea = OutputSliderArea.removeFromLeft(OutputSliderArea.getWidth()/2);
-    
+    auto InputSliderArea = OutputSliderArea.removeFromLeft(OutputSliderArea.getWidth() / 2);
+
     audioProcessor.waveViewer.setBounds(responseArea);
 
     InputSlider.setBounds(InputSliderArea);
     OutputSlider.setBounds(OutputSliderArea);
-    WaveZoom.setBounds(responseSlider);
-    
 }
 
 std::vector<juce::Component*> GeneralPluginAudioProcessorEditor::getComps()
@@ -65,7 +58,6 @@ std::vector<juce::Component*> GeneralPluginAudioProcessorEditor::getComps()
     return
     {
         &InputSlider,
-        &OutputSlider,
-        &WaveZoom
+        &OutputSlider
     };
 }

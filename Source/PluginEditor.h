@@ -1,8 +1,6 @@
 /*
   ==============================================================================
-
     This file contains the basic framework code for a JUCE plugin editor.
-
   ==============================================================================
 */
 
@@ -11,17 +9,13 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-
-
-struct CustomHorizontalSlider : juce::Slider
+struct CustomSlider : juce::Slider
 {
-    CustomHorizontalSlider() : juce::Slider(juce::Slider::SliderStyle::LinearHorizontal,
-                               juce::Slider::TextEntryBoxPosition::TextBoxLeft
-                                )
+    CustomSlider() : juce::Slider(juce::Slider::SliderStyle::LinearHorizontal,
+        juce::Slider::TextEntryBoxPosition::TextBoxAbove)
     {
-       
+
     }
-    
 };
 
 //==============================================================================
@@ -32,7 +26,7 @@ class GeneralPluginAudioProcessorEditor : public juce::AudioProcessorEditor
 public:
     GeneralPluginAudioProcessorEditor(GeneralPluginAudioProcessor&);
     ~GeneralPluginAudioProcessorEditor() override;
-    
+
     //==============================================================================
     void paint(juce::Graphics&) override;
     void resized() override;
@@ -42,13 +36,10 @@ private:
     // access the processor object that created it.
     GeneralPluginAudioProcessor& audioProcessor;
 
-    CustomHorizontalSlider InputSlider, OutputSlider, WaveZoom;
+    CustomSlider InputSlider, OutputSlider;
 
     std::vector<juce::Component*> getComps();
 
-    using APVTS = juce::AudioProcessorValueTreeState;
-    using Attachment = APVTS::SliderAttachment;
-    Attachment InInputSlider, OutputSlider, WaveZoom;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessorEditor)
 };

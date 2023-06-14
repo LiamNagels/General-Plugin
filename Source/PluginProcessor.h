@@ -1,8 +1,6 @@
 /*
   ==============================================================================
-
     This file contains the basic framework code for a JUCE plugin processor.
-
   ==============================================================================
 */
 
@@ -56,23 +54,19 @@ public:
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
 
-
-    
     juce::AudioProcessorValueTreeState treestate;
     juce::AudioVisualiserComponent waveViewer;
 
 private:
     juce::dsp::Gain<float> inputModule;
-    juce::dsp::WaveShaper<float> distortionModule{juce::dsp::FastMathApproximations::tanh};
+    juce::dsp::WaveShaper<float> distortionModule{ juce::dsp::FastMathApproximations::tanh };
     juce::dsp::Gain<float> outputModule;
     juce::dsp::Limiter<float> limiterModule;
     void UpdateParameters();
 
-    
-   
-    
-    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    juce::AudioProcessorValueTreeState apvts{ this, nullptr, "Parameters", createParameterLayout() }; 
+
+
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void parameterChanged(const juce::String& parameterID, float newValue)override;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessor)
