@@ -9,14 +9,6 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-//struct CustomSlider : juce::Slider
-//{
-//    CustomSlider() : juce::Slider(juce::Slider::SliderStyle::LinearHorizontal, 
-//                                  juce::Slider::TextEntryBoxPosition::TextBoxAbove)
-//    {
-//       
-//    }
-//};
 
 // ChatGDP
 class CustomSlider : public juce::Slider
@@ -25,11 +17,11 @@ public:
     CustomSlider()
     {
         // Customize the appearance and behavior of the slider here
-        // For example, you can set the slider style, color, range, etc.
+        
         setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
         setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxAbove, true, 50, 30);
         setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red);
-        setRange(-24, 24, 0.1); // Set the range and increment value
+        setRange(-24, 24, 0.1); 
     }
 
     ~CustomSlider()
@@ -43,6 +35,23 @@ public:
     }
 };
 
+class CustomButton : public juce::ToggleButton
+{
+public:
+    CustomButton()
+    {
+        
+        setColour(juce::ToggleButton::ColourIds::tickColourId, juce::Colours::white);
+        setButtonText("Loudnes compensation");
+        
+    }
+
+    ~CustomButton()
+    {
+    }
+
+    // Add any additional member functions or overrides as needed
+};
 
 //==============================================================================
 /**
@@ -67,7 +76,7 @@ private:
     using Attachments = TREESTATE::SliderAttachment;
     Attachments DistortionAttachment, OutputAttachment;
     
-    
+    CustomButton LinkButton;
     
                                       
 

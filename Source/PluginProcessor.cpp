@@ -39,7 +39,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor:
 {
     std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
 
-    auto pInput = std::make_unique<juce::AudioParameterFloat>("input", "Input", -24.f, 24.f, 0.f);
+    auto pInput = std::make_unique<juce::AudioParameterFloat>("input", "Input", 0.f, 24.f, 0.f);
     auto pOutput = std::make_unique<juce::AudioParameterFloat>("output", "Output", -24.f, 24.f, 0.f);
     
     params.push_back(std::move(pInput));
@@ -138,7 +138,7 @@ void GeneralPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
     distortionModule.prepare(spec);
     limiterModule.prepare(spec);
     limiterModule.setThreshold(0.99);
-    limiterModule.setThreshold(1.f);
+    limiterModule.setRelease(1.f);
     UpdateParameters();
 
 
