@@ -7,9 +7,13 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
+
 //==============================================================================
 GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPluginAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p), DistortionSlider()
+    : AudioProcessorEditor(&p), audioProcessor(p), 
+    DistortionAttachment(audioProcessor.treestate, "input", DistortionSlider), 
+    OutputAttachment(audioProcessor.treestate, "output", OutputSlider)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -17,11 +21,13 @@ GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPlug
     //{
     //    addAndMakeVisible(comps);
     //}
+    // Access the treestate object
     
-
+    
     addAndMakeVisible(DistortionSlider);
     addAndMakeVisible(OutputSlider);
-
+    
+    
     WaveZoom.BecomeWaveZoomSlider();
     addAndMakeVisible(WaveZoom);
     WaveZoom.onValueChange = [this]()
@@ -31,6 +37,12 @@ GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPlug
 
     addAndMakeVisible(audioProcessor.waveViewer);
     setSize(600, 400);
+
+    // Get the GenericAudioProcessorEditor sliders
+    //juce::Slider* genericSlider = processor.getActiveEditor() ->Get;
+
+    // Link the GenericAudioProcessorEditor slider to your AudioProcessorEditor slider
+    //DistortionSlider.getValueObject().referTo(genericSlider->getValueObject());
 }
 
 
@@ -61,7 +73,7 @@ void GeneralPluginAudioProcessorEditor::resized()
     auto distortionSliderArea = OutputSliderArea.removeFromLeft(OutputSliderArea.getWidth() / 2);
 
     audioProcessor.waveViewer.setBounds(responseArea);
-
+    
     DistortionSlider.setBounds(distortionSliderArea);
     OutputSlider.setBounds(OutputSliderArea);
     WaveZoom.setBounds(waveZoomArea);
@@ -78,3 +90,5 @@ void GeneralPluginAudioProcessorEditor::resized()
 //        &OutputSlider
 //    };
 //}
+
+

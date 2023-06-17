@@ -28,7 +28,7 @@ public:
         // For example, you can set the slider style, color, range, etc.
         setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
         setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxAbove, true, 50, 30);
-        setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::whitesmoke);
+        setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red);
         setRange(-24, 24, 0.1); // Set the range and increment value
     }
 
@@ -61,10 +61,12 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     GeneralPluginAudioProcessor& audioProcessor;
-
-    CustomSlider DistortionSlider, OutputSlider, WaveZoom;
     
-    //std::vector<juce::Component*> getComps();
+    CustomSlider DistortionSlider, OutputSlider, WaveZoom;
+    using TREESTATE = juce::AudioProcessorValueTreeState;
+    using Attachments = TREESTATE::SliderAttachment;
+    Attachments DistortionAttachment, OutputAttachment;
+    
     
     
                                       

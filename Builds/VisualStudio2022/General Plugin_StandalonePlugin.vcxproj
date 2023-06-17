@@ -76,7 +76,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>C:\Users\LiamN\OneDrive\Bureaublad\school\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;C:\Users\LiamN\OneDrive\Bureaublad\school\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -121,7 +121,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>C:\Users\LiamN\OneDrive\Bureaublad\school\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;C:\Users\LiamN\OneDrive\Bureaublad\school\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

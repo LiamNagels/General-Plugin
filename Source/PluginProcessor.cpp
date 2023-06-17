@@ -18,7 +18,7 @@ GeneralPluginAudioProcessor::GeneralPluginAudioProcessor()
         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
     )
-    , treestate(*this, nullptr, "PARAMETER", createParameterLayout())
+    , treestate(*this, nullptr, "PARAMETER", CreateParameterLayout())
     , waveViewer(1)
 #endif
 {
@@ -26,6 +26,7 @@ GeneralPluginAudioProcessor::GeneralPluginAudioProcessor()
     treestate.addParameterListener("output", this);
     waveViewer.setRepaintRate(60);
     waveViewer.setBufferSize(256);
+    
 }
 
 GeneralPluginAudioProcessor::~GeneralPluginAudioProcessor()
@@ -34,16 +35,15 @@ GeneralPluginAudioProcessor::~GeneralPluginAudioProcessor()
     treestate.removeParameterListener("output", this);
 }
 
-juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::createParameterLayout()
+juce::AudioProcessorValueTreeState::ParameterLayout GeneralPluginAudioProcessor::CreateParameterLayout()
 {
     std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
 
     auto pInput = std::make_unique<juce::AudioParameterFloat>("input", "Input", -24.f, 24.f, 0.f);
     auto pOutput = std::make_unique<juce::AudioParameterFloat>("output", "Output", -24.f, 24.f, 0.f);
-
+    
     params.push_back(std::move(pInput));
     params.push_back(std::move(pOutput));
-
     return{ params.begin(), params.end() };
 }
 
@@ -179,8 +179,8 @@ bool GeneralPluginAudioProcessor::isBusesLayoutSupported(const BusesLayout& layo
 void GeneralPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    //auto totalNumInputChannels = getTotalNumInputChannels();
+    //auto totalNumOutputChannels = getTotalNumOutputChannels();
 
     juce::dsp::AudioBlock<float> block{ buffer };
 
@@ -191,8 +191,8 @@ void GeneralPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 
     waveViewer.pushBuffer(buffer);
 
-
 }
+
 
 //==============================================================================
 bool GeneralPluginAudioProcessor::hasEditor() const
@@ -202,8 +202,8 @@ bool GeneralPluginAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* GeneralPluginAudioProcessor::createEditor()
 {
-    return new GeneralPluginAudioProcessorEditor(*this);
     //return new juce::GenericAudioProcessorEditor(*this);
+    return new GeneralPluginAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -233,3 +233,5 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new GeneralPluginAudioProcessor();
 }
+
+
