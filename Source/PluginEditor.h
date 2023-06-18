@@ -64,7 +64,7 @@ public:
     {
         // Fill the background with a color or image
         // You can customize the appearance as per your requirements
-        g.fillAll(juce::Colours::white);
+        // g.fillAll(juce::Colours::white);
 
         // Draw the text on the background
         g.setColour(juce::Colours::ghostwhite);
@@ -76,10 +76,7 @@ public:
         backgroundText = Text;
     }
 
-    void ChangeFontSize(int deltaX, int deltaY)
-    {
-        setSize(getWidth() + deltaX, getHeight() + deltaY);
-    }
+    
 
 private:
     juce::String backgroundText;

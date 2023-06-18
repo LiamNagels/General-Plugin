@@ -92,5 +92,4 @@ void GeneralPluginAudioProcessorEditor::resized()
     OutputVolumeText.SetText("Output volume");
     DistortionText.setBounds(DistortionTextArea);
     DistortionText.SetText("Distortion Drive");
-    DistortionText.ChangeFontSize(500,50);
 }
