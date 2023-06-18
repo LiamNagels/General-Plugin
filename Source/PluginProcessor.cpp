@@ -137,7 +137,7 @@ void GeneralPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
 
     distortionModule.prepare(spec);
     limiterModule.prepare(spec);
-    limiterModule.setThreshold(0.99);
+    limiterModule.setThreshold(10);
     limiterModule.setRelease(1.f);
     UpdateParameters();
 

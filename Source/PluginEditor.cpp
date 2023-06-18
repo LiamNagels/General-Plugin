@@ -27,17 +27,17 @@ GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPlug
     addAndMakeVisible(DistortionSlider);
     addAndMakeVisible(OutputSlider);
     addAndMakeVisible(LinkButton);
+    addAndMakeVisible(DistortionText);
+    
     
     DistortionSlider.onValueChange = [this]()
     {
         if (LinkButton.getToggleState())
         {
-            
             OutputSlider.setValue(DistortionSlider.getValue()* -0.3f);
-            auto buttonState = LinkButton.getState();
         }
     };
-    WaveZoom.BecomeWaveZoomSlider();
+    WaveZoom.SetWaveZoomSlider();
     addAndMakeVisible(WaveZoom);
     WaveZoom.onValueChange = [this]()
     {
@@ -45,13 +45,8 @@ GeneralPluginAudioProcessorEditor::GeneralPluginAudioProcessorEditor(GeneralPlug
     };
 
     addAndMakeVisible(audioProcessor.waveViewer);
+    addAndMakeVisible(OutputVolumeText);
     setSize(600, 400);
-
-    // Get the GenericAudioProcessorEditor sliders
-    //juce::Slider* genericSlider = processor.getActiveEditor() ->Get;
-
-    // Link the GenericAudioProcessorEditor slider to your AudioProcessorEditor slider
-    //DistortionSlider.getValueObject().referTo(genericSlider->getValueObject());
 }
 
 
@@ -67,6 +62,7 @@ void GeneralPluginAudioProcessorEditor::paint(juce::Graphics& g)
 
     g.setColour(juce::Colours::white);
     g.setFont(15.0f);
+    
     //g.drawFittedText("Hello ISP!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
@@ -76,11 +72,15 @@ void GeneralPluginAudioProcessorEditor::resized()
     // subcomponents in your editor..
     //audioProcessor.waveViewer.setBounds(getLocalBounds().withSizeKeepingCentre(getWidth() * 0.5, getHeight() * 0.5));
     auto bounds = getLocalBounds();
+    
+
     auto responseArea = bounds.removeFromTop(bounds.getHeight() / 1.5);
     auto waveZoomArea = responseArea.removeFromBottom(responseArea.getHeight() * 0.2);
     auto toggleButtonArea = waveZoomArea.removeFromBottom(waveZoomArea.getHeight() / 3);
-    auto OutputSliderArea = bounds.removeFromBottom(bounds.getHeight() / 2);
-    auto distortionSliderArea = OutputSliderArea.removeFromLeft(OutputSliderArea.getWidth() / 2);
+    auto OutputVolumeTextArea = bounds.removeFromRight(bounds.getWidth()/2);
+    auto OutputSliderArea = OutputVolumeTextArea.removeFromBottom(OutputVolumeTextArea.getHeight() / 2);
+    auto DistortionTextArea = bounds.removeFromTop(bounds.getHeight() / 2);
+    auto distortionSliderArea = bounds;
     
     
     audioProcessor.waveViewer.setBounds(responseArea);
@@ -88,18 +88,9 @@ void GeneralPluginAudioProcessorEditor::resized()
     DistortionSlider.setBounds(distortionSliderArea);
     OutputSlider.setBounds(OutputSliderArea);
     WaveZoom.setBounds(waveZoomArea);
-
-    //InputSlider.setBounds(InputSliderArea);
-    //OutputSlider.setBounds(OutputSliderArea);
+    OutputVolumeText.setBounds(OutputVolumeTextArea);
+    OutputVolumeText.SetText("Output volume");
+    DistortionText.setBounds(DistortionTextArea);
+    DistortionText.SetText("Distortion Drive");
+    DistortionText.ChangeFontSize(500,50);
 }
-
-//std::vector<juce::Component*> GeneralPluginAudioProcessorEditor::getComps()
-//{
-//    return
-//    {
-//        &InputSlider,
-//        &OutputSlider
-//    };
-//}
-
-

@@ -21,7 +21,7 @@ public:
         setSliderStyle(juce::Slider::SliderStyle::LinearHorizontal);
         setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxAbove, true, 50, 30);
         setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::red);
-        setRange(-24, 24, 0.1); 
+        //setRange(-24, 24, 0.1); 
     }
 
     ~CustomSlider()
@@ -29,7 +29,7 @@ public:
     }
 
     // Add any additional member functions or overrides as needed
-    void BecomeWaveZoomSlider()
+    void SetWaveZoomSlider()
     {
         setRange(256, 1024, 1);
     }
@@ -40,10 +40,8 @@ class CustomButton : public juce::ToggleButton
 public:
     CustomButton()
     {
-        
         setColour(juce::ToggleButton::ColourIds::tickColourId, juce::Colours::white);
         setButtonText("Loudnes compensation");
-        
     }
 
     ~CustomButton()
@@ -53,6 +51,53 @@ public:
     // Add any additional member functions or overrides as needed
 };
 
+class BackGroundText : public juce::Component
+{
+public:
+    BackGroundText()
+    {
+        backgroundText = "xxxxxx";
+    };
+    ~BackGroundText() {};
+
+    void paint(juce::Graphics& g) override 
+    {
+        // Fill the background with a color or image
+        // You can customize the appearance as per your requirements
+        g.fillAll(juce::Colours::white);
+
+        // Draw the text on the background
+        g.setColour(juce::Colours::ghostwhite);
+        g.setFont(25.0f);
+        g.drawText(backgroundText, getLocalBounds(), juce::Justification::centred, true);
+    };
+    void SetText(auto Text)
+    {
+        backgroundText = Text;
+    }
+
+    void ChangeFontSize(int deltaX, int deltaY)
+    {
+        setSize(getWidth() + deltaX, getHeight() + deltaY);
+    }
+
+private:
+    juce::String backgroundText;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(BackGroundText)
+};
+//class VolumeMeterComponent : public juce::Component
+//{
+//public:
+//    VolumeMeterComponent();
+//    ~VolumeMeterComponent();
+//    void paint(juce::Graphics& g) override;
+//    void setVolume(float volume); // Method to set the volume level    
+//private:
+//    float currentVolume;
+
+//    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(VolumeMeterComponent)
+//};
 //==============================================================================
 /**
 */
@@ -77,7 +122,7 @@ private:
     Attachments DistortionAttachment, OutputAttachment;
     
     CustomButton LinkButton;
-    
+    BackGroundText DistortionText, OutputVolumeText;
                                       
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GeneralPluginAudioProcessorEditor)
